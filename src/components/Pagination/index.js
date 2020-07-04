@@ -2,15 +2,20 @@
 import React from 'react'
 import {PaginationRow} from './Pagination'
 
-const Pagination = ({currentPage, totalPages}) => {
+const Pagination = ({
+  currentPage,
+  totalPages,
+  loadPreviousPage,
+  loadNextPage,
+}) => {
   const onClickPrev = () => {
     if (!(currentPage === 1)) {
-      this.props.loadPreviousPage()
+      loadPreviousPage()
     }
   }
   const onClickNext = () => {
     if (!(currentPage === totalPages)) {
-      this.props.loadNextPage()
+      loadNextPage()
     }
   }
   return (
