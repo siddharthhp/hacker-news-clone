@@ -1,14 +1,16 @@
 import React from 'react'
 import BulletinHeader from '../components/BulletinHeader/index'
 import BulletinFeed from './BulletinFeed'
-import {List} from '../Styled/Container'
+import {Container, List} from '../Styled/Container'
 
 const Main = () => {
   return (
-    <List>
-      <BulletinHeader />
-      <BulletinFeed />
-    </List>
+    <Container>
+      <List>
+        <BulletinHeader />
+        <BulletinFeed />
+      </List>
+    </Container>
   )
 }
 
