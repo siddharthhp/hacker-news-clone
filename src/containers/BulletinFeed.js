@@ -34,7 +34,7 @@ const BulletinFeed = props => {
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {
       dispatch({type: 'POPULATE_STORIES', hits})
-      setTotalPages(nbPages)
+      !totalPages && setTotalPages(nbPages)
     })
     addParamToUrl()
   }, [page])
@@ -44,9 +44,7 @@ const BulletinFeed = props => {
   }
 
   const loadPreviousPage = () => {
-    if (page >= 1) {
-      setPage(page - 1)
-    }
+    setPage(page - 1)
   }
 
   return (
