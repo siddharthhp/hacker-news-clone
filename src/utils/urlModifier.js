@@ -1,14 +1,13 @@
-export function prepareQueryParams(params) {
-  let queryparam = '?'
+export const prepareQueryParams = params => {
+  let queryParam = '?'
   for (let key in params) {
-    queryparam += `${key}=${params[key]}&`
+    queryParam += `${key}=${params[key]}&`
   }
-  return queryparam.substring(0, queryparam.length - 1)
+  return queryParam.substring(0, queryParam.length - 1)
 }
 
-export function getQueryParams() {
+export const getQueryParams = () => {
   const queryParams = {}
-
   const queryStr = isValidValue(window.location.search)
     ? window.location.search.substr(1)
     : ''
@@ -26,6 +25,6 @@ export function getQueryParams() {
   return queryParams
 }
 
-export function isValidValue(val) {
+export const isValidValue = val => {
   return val !== undefined && val !== null && val !== 'null' && val !== ''
 }
