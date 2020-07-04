@@ -8,10 +8,50 @@ export const NewsItem = styled.li`
   .arrow-up {
     width: 0;
     height: 0;
+    cursor: pointer;
     position: relative;
     top: -15px;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 10px solid black;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 14px solid #919191;
   }
+  @media all and (max-width: 767px) {
+    .col {
+      display: none;
+    }
+  }
+`
+export const MobileRow = styled.div`
+  display: none;
+  @media all and (max-width: 767px) {
+    display: flex;
+    padding: 8px;
+  }
+`
+export const Link = styled.a`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+`
+export const HideButton = styled.button`
+  font-size: 10px;
+  font-weight: bold;
+  padding-left: 8px;
+  cursor: pointer;
+  @media all and (max-width: 767px) {
+    font-size: 12px;
+  }
+`
+export const GreyText = styled.span`
+  color: #919191;
+  font-size: 10px;
+  @media all and (max-width: 767px) {
+    font-size: 12px;
+  }
+`
+export const Author = styled.span`
+  font-size: 12px;
+  font-weight: bold;
 `

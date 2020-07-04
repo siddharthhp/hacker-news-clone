@@ -6,8 +6,11 @@ import {
   Redirect,
 } from 'react-router-dom'
 import Main from './containers/Main'
+import JavascriptTimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 
 export const App = () => {
+  JavascriptTimeAgo.addLocale(en)
   return (
     <Router>
       <Switch>
