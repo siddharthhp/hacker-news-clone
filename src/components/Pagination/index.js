@@ -8,12 +8,14 @@ const Pagination = ({
   loadPreviousPage,
   loadNextPage,
 }) => {
-  const onClickPrev = () => {
+  const onClickPrev = evt => {
+    evt.preventDefault()
     if (!(currentPage === 1)) {
       loadPreviousPage()
     }
   }
-  const onClickNext = () => {
+  const onClickNext = evt => {
+    evt.preventDefault()
     if (!(currentPage === totalPages)) {
       loadNextPage()
     }
@@ -26,6 +28,7 @@ const Pagination = ({
           onClick={onClickPrev}
           className="prev"
           aria-label="Navigate to previous page"
+          href="/"
         >
           Previous
         </a>
@@ -33,6 +36,7 @@ const Pagination = ({
           disabled={currentPage === totalPages}
           onClick={onClickNext}
           aria-label="Navigate to next page"
+          href="/"
         >
           Next
         </a>

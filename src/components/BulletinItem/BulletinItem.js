@@ -1,10 +1,19 @@
 import styled from 'styled-components'
 
 export const NewsItem = styled.li`
-  background-color: #f6f6ef;
+  background-color: #ededda;
   &:nth-child(odd) {
     background: #d6d6c7;
   }
+
+  @media all and (max-width: 767px) {
+    .col {
+      display: none;
+    }
+  }
+`
+export const Upvote = styled.button`
+  font-size: 0;
   .arrow-up {
     width: 0;
     height: 0;
@@ -14,11 +23,6 @@ export const NewsItem = styled.li`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 14px solid #919191;
-  }
-  @media all and (max-width: 767px) {
-    .col {
-      display: none;
-    }
   }
 `
 export const MobileRow = styled.div`
@@ -44,8 +48,7 @@ export const HideButton = styled.button`
     font-size: 12px;
   }
 `
-export const GreyText = styled.span`
-  color: #919191;
+export const Text = styled.span`
   font-size: 10px;
   @media all and (max-width: 767px) {
     font-size: 12px;
