@@ -6,9 +6,10 @@ import {
   NewsItem,
   Link,
   HideButton,
-  GreyText,
+  Text,
   Author,
   MobileRow,
+  Upvote,
 } from './BulletinItem'
 
 const BulletinItem = ({story}) => {
@@ -33,34 +34,34 @@ const BulletinItem = ({story}) => {
   return (
     <NewsItem className="table-row">
       <MobileRow>
-        <button onClick={upvote}>
-          <span className="arrow-up"></span>
-        </button>
+        <Upvote onClick={upvote}>
+          <span className="arrow-up"></span>Upvote
+        </Upvote>
         <Link href={url} target="_new">
           {title}
         </Link>{' '}
       </MobileRow>
       <MobileRow>
-        <GreyText>
+        <Text>
           {points} points by {author} <ReactTimeAgo date={created_at} />
-        </GreyText>
+        </Text>
         <HideButton onClick={hideElement}>[ Hide ]</HideButton>
       </MobileRow>
       <div className="col col-1">{num_comments}</div>
       <div className="col col-2">{points}</div>
       <div className="col col-3">
-        <button onClick={upvote}>
-          <span className="arrow-up"></span>
-        </button>
+        <Upvote onClick={upvote}>
+          <span className="arrow-up"></span>Upvote
+        </Upvote>
       </div>
       <div className="col col-4">
         <Link href={url} target="_new">
           {title}
         </Link>{' '}
-        <GreyText>by</GreyText> <Author>{author}</Author>{' '}
-        <GreyText>
+        <Text>by</Text> <Author>{author}</Author>{' '}
+        <Text>
           <ReactTimeAgo date={created_at} />
-        </GreyText>
+        </Text>
         <HideButton onClick={hideElement}>[ Hide ]</HideButton>
       </div>
     </NewsItem>

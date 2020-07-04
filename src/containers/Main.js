@@ -9,6 +9,7 @@ import Reset from '../styles/Reset'
 const Main = () => {
   return (
     <Container>
+      <h2>Hacker News Feed</h2>
       <Reset />
       <GlobalFonts />
       <List>
