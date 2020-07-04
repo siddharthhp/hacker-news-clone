@@ -4,20 +4,6 @@ export const Container = styled.div`
   width: 95%;
   margin: 0 auto;
   padding: 0 10px;
-  ul,
-  li {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: baseline;
-  }
-  body {
-    line-height: 1;
-  }
-  ol,
-  ul {
-    list-style: none;
-  }
 `
 
 export const List = styled.ul`
