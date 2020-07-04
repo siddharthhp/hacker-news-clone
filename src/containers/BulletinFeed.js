@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, {useState, useReducer, useEffect} from 'react'
 import storiesReducer from '../reducers/stories'
+import {BulletinChart} from './BulletinChart'
 import BulletinItem from '../components/BulletinItem/index'
 import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
@@ -61,6 +62,7 @@ const BulletinFeed = props => {
         loadPreviousPage={loadPreviousPage}
         loadNextPage={loadNextPage}
       />
+      <BulletinChart />
     </StoriesContext.Provider>
   )
 }
