@@ -8,7 +8,6 @@ export const prepareQueryParams = params => {
 
 export const getQueryParams = () => {
   const queryParams = {}
-
   const queryStr = isValidValue(window.location.search)
     ? window.location.search.substr(1)
     : ''
