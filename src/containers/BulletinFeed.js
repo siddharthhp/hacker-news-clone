@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, {useState, useReducer, useEffect} from 'react'
-import storiesReducer from '../reducers/reducer'
+import storiesReducer from '../reducers/stories'
 import BulletinItem from '../components/BulletinItem/index'
 import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
@@ -13,15 +13,13 @@ import {
 } from '../utils/urlModifier'
 
 const BulletinFeed = props => {
+  const [stories, dispatch] = useReducer(storiesReducer, [])
+  const [totalPages, setTotalPages] = useState(0)
   const params = getQueryParams()
   const pageParam =
     isValidValue(params) && isValidValue(params.page)
       ? parseInt(params.page)
       : 1
-
-  const [stories, dispatch] = useReducer(storiesReducer, [])
-  const [page, setPage] = useState(pageParam)
-  const [totalPages, setTotalPages] = useState(0)
 
   const addParamToUrl = () => {
     const payload = {
@@ -30,6 +28,7 @@ const BulletinFeed = props => {
     let url = prepareQueryParams(payload)
     props.history.push(url)
   }
+  const [page, setPage] = useState(pageParam)
 
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {

@@ -1,7 +1,8 @@
 import React from 'react'
 import BulletinHeader from '../components/BulletinHeader/index'
 import BulletinFeed from './BulletinFeed'
-import {Container, List} from '../styles/Container'
+import {Container} from '../styles/Container'
+import {List} from '../styles/List'
 import GlobalFonts from '../styles/Fonts'
 import Reset from '../styles/Reset'
 
