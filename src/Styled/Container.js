@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 0 10px;
   ul,
   li {
     margin: 0;
@@ -47,8 +45,6 @@ export const List = styled.ul`
   }
 
   @media all and (max-width: 767px) {
-    .table-row {
-    }
     li {
       display: block;
     }
@@ -65,6 +61,9 @@ export const List = styled.ul`
         flex-basis: 50%;
         text-align: right;
       }
+    }
+    .s-hidden {
+      display: none;
     }
   }
 `

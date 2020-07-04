@@ -2,7 +2,7 @@ import React from 'react'
 import {Header} from './BulletinHeader'
 
 const BulletinHeader = () => (
-  <Header>
+  <Header className="s-hidden">
     <div className="col col-1">Comments</div>
     <div className="col col-2">Vote Count</div>
     <div className="col col-3">Upvote</div>
