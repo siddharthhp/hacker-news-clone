@@ -1,12 +1,19 @@
 import React from 'react'
-import BulletinHeader from './containers/BulletinHeader'
-import BulletinContainer from './containers/Bulletin'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
+import Main from './containers/Main'
 
 export const App = () => {
   return (
-    <div>
-      <BulletinHeader />
-      <BulletinContainer />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/newsFeed" component={Main} />
+        <Redirect to="/newsFeed" />
+      </Switch>
+    </Router>
   )
 }
