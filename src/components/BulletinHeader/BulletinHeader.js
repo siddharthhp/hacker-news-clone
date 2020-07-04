@@ -7,9 +7,4 @@ export const Header = styled.li`
   letter-spacing: 0.03em;
   font-weight: bold;
   color: #fff;
-  @media all and (max-width: 767px) {
-    .table-header {
-      display: none;
-    }
-  }
 `
