@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, {useState, useReducer, useEffect} from 'react'
 import storiesReducer from '../reducers/stories'
 import {BulletinChart} from './BulletinChart'

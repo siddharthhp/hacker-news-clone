@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, {useContext} from 'react'
 import ReactTimeAgo from 'react-time-ago'
 import StoriesContext from '../../context/stories'
