@@ -6,24 +6,24 @@ import BulletinItem from '../components/BulletinItem/index'
 import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
 import Pagination from '../components/Pagination'
-import {withRouter} from 'react-router-dom'
 import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
 
 const BulletinFeed = props => {
-  const [stories, dispatch] = useReducer(storiesReducer, [])
+  const [stories, dispatch] = useReducer(storiesReducer, props.store.hits || [])
   const [totalPages, setTotalPages] = useState(0)
   const {page: pageParam} = getQueryParams(props.location.search)
   const page = parseInt(pageParam) || 1
 
-  const addParamToUrl = pageNum => {
+  const addParamToUrl = pageNumber => {
     const payload = {
-      page: pageNum,
+      page: pageNumber,
     }
     let url = prepareQueryParams(payload)
     props.history.push(url)
   }
 
   useEffect(() => {
+    console.log('bulletin use effect')
     getStories(page).then(({hits, nbPages}) => {
       dispatch({type: 'POPULATE_STORIES', hits})
       !totalPages && setTotalPages(nbPages)
@@ -42,6 +42,7 @@ const BulletinFeed = props => {
   const loadPreviousPage = () => {
     return page <= 1 ? '' : addParamToUrl(page - 1)
   }
+  console.log('******bulletin use effect')
 
   return (
     <StoriesContext.Provider value={{stories, dispatch}}>
@@ -61,4 +62,4 @@ const BulletinFeed = props => {
   )
 }
 
-export default withRouter(BulletinFeed)
+export default BulletinFeed

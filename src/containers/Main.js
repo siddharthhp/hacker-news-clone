@@ -6,7 +6,7 @@ import {List} from '../styles/List'
 import GlobalFonts from '../styles/Fonts'
 import Reset from '../styles/Reset'
 
-const Main = () => {
+const Main = ({...props}) => {
   return (
     <Container>
       <h2>Hacker News Feed</h2>
@@ -14,7 +14,7 @@ const Main = () => {
       <GlobalFonts />
       <List>
         <BulletinHeader />
-        <BulletinFeed />
+        <BulletinFeed {...props} />
       </List>
     </Container>
   )

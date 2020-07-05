@@ -16,9 +16,13 @@ const BulletinItem = ({story}) => {
   const {num_comments, points, title, objectID, created_at, author, url} = story
   const {dispatch} = useContext(StoriesContext)
   const hiddenElements =
-    JSON.parse(localStorage.getItem('hiddenElements')) || []
+    typeof localStorage !== 'undefined'
+      ? JSON.parse(localStorage.getItem('hiddenElements')) || []
+      : []
   const upvotedElements =
-    JSON.parse(localStorage.getItem('upvoteElements')) || []
+    typeof localStorage !== 'undefined'
+      ? JSON.parse(localStorage.getItem('upvoteElements')) || []
+      : []
   const upvote = () => {
     dispatch({type: 'INCREASE_UPVOTE', objectID})
     upvotedElements.push({
