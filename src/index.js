@@ -4,6 +4,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 const initialState = global.window && global.window.__INITIAL_STATE__
+console.log(initialState)
 
 ReactDOM.hydrate(<App store={initialState} />, document.getElementById('root'))
 

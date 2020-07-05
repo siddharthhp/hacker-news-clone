@@ -31,7 +31,7 @@ const App = props => {
   } else {
     return (
       <Router>
-        <AppRoutes />
+        <AppRoutes store={props.store} />
       </Router>
     )
   }

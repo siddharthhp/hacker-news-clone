@@ -3,9 +3,11 @@ const renderToString = require('react-dom/server').renderToString
 const matchPath = require('react-router').matchPath
 const path = require('path')
 const fs = require('fs')
+const ServerStyleSheet = require('styled-components').ServerStyleSheet
 
 const App = require('../src/App').default
 const getNewsItems = require('../src/services/hnApi').default
+const sheet = new ServerStyleSheet()
 
 exports = module.exports
 
@@ -40,15 +42,16 @@ exports.render = routes => {
           console.log(`SSR of ${req.path}`)
         }
         const jsx = <App store={store} location={location} />
-        const reactDom = renderToString(jsx)
-        console.log(reactDom)
+        const reactDom = renderToString(sheet.collectStyles(jsx))
+        const styleTags = sheet.getStyleTags()
         return res.end(
           htmlData
             .replace(
               '<div id="root"></div>',
               `<div id="root">${reactDom}</div>`,
             )
-            .replace('__REDUX__', JSON.stringify(store)),
+            .replace('__STATE__', JSON.stringify(store))
+            .replace('__STYLE_TAGS__', styleTags),
         )
       })
     } else {
