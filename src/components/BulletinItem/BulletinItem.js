@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import Colors from '../../styles/Colors'
 
 export const NewsItem = styled.li`
-  background-color: #ededda;
+  background-color: ${Colors.offWhite};
   &:nth-child(odd) {
-    background: #d6d6c7;
+    background: ${Colors.lightGrey};
   }
 
   @media all and (max-width: 767px) {
