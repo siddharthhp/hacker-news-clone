@@ -7,44 +7,40 @@ import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
 import Pagination from '../components/Pagination'
 import {withRouter} from 'react-router-dom'
-import {
-  prepareQueryParams,
-  getQueryParams,
-  isValidValue,
-} from '../utils/urlModifier'
+import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
 
 const BulletinFeed = props => {
   const [stories, dispatch] = useReducer(storiesReducer, [])
   const [totalPages, setTotalPages] = useState(0)
-  const params = getQueryParams()
-  const pageParam =
-    isValidValue(params) && isValidValue(params.page)
-      ? parseInt(params.page)
-      : 1
+  const {page: pageParam} = getQueryParams(props.location.search)
+  const page = parseInt(pageParam) || 1
 
-  const addParamToUrl = () => {
+  const addParamToUrl = pageNum => {
     const payload = {
-      page: page,
+      page: pageNum,
     }
     let url = prepareQueryParams(payload)
     props.history.push(url)
   }
-  const [page, setPage] = useState(pageParam)
 
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {
       dispatch({type: 'POPULATE_STORIES', hits})
       !totalPages && setTotalPages(nbPages)
     })
-    addParamToUrl()
   }, [page])
 
+  if (!pageParam || !parseInt(pageParam)) {
+    addParamToUrl(1)
+    return null
+  }
+
   const loadNextPage = () => {
-    setPage(page + 1)
+    addParamToUrl(page + 1)
   }
 
   const loadPreviousPage = () => {
-    setPage(page - 1)
+    return page <= 1 ? '' : addParamToUrl(page - 1)
   }
 
   return (
