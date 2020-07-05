@@ -13,7 +13,6 @@ import {
 } from '../utils/urlModifier'
 
 const BulletinFeed = props => {
-  console.log('from bulletin', props.store)
   const [stories, dispatch] = useReducer(storiesReducer, props.store.hits)
   const [totalPages, setTotalPages] = useState(props.store.nbPages)
   const params = getQueryParams()
