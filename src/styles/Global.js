@@ -1,8 +1,6 @@
 import {createGlobalStyle} from 'styled-components'
-//import Robotottf from '../fonts/Roboto-Regular.ttf'
 
 export default createGlobalStyle`
-  
   ul,
   li {
     margin: 0;

@@ -4,7 +4,7 @@ import BulletinHeader from '../components/BulletinHeader/index'
 import BulletinFeed from './BulletinFeed'
 import {Container} from '../styles/Container'
 import {List} from '../styles/List'
-import GlobalFonts from '../styles/Fonts'
+import Global from '../styles/Global'
 import Reset from '../styles/Reset'
 
 const Main = ({store}) => {
@@ -12,7 +12,7 @@ const Main = ({store}) => {
     <Container>
       <h2>Hacker News Feed</h2>
       <Reset />
-      <GlobalFonts />
+      <Global />
       <List>
         <BulletinHeader />
         <BulletinFeed store={store} />
