@@ -9,6 +9,7 @@ export default createGlobalStyle`
     vertical-align: baseline;
   }
   body {
+    font-family: 'Roboto', sans-serif;
     line-height: 1;
     font-family: 'Roboto';
   }
