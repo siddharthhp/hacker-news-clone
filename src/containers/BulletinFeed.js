@@ -14,13 +14,14 @@ import {
 } from '../utils/urlModifier'
 
 const BulletinFeed = props => {
-  const [stories, dispatch] = useReducer(storiesReducer, [])
-  const [totalPages, setTotalPages] = useState(0)
+  console.log('from bulletin', props.store)
+  const [stories, dispatch] = useReducer(storiesReducer, props.store.hits)
+  const [totalPages, setTotalPages] = useState(props.store.nbPages)
   const params = getQueryParams()
   const pageParam =
     isValidValue(params) && isValidValue(params.page)
       ? parseInt(params.page)
-      : 1
+      : props.store.page
 
   const addParamToUrl = () => {
     const payload = {
@@ -30,7 +31,6 @@ const BulletinFeed = props => {
     props.history.push(url)
   }
   const [page, setPage] = useState(pageParam)
-
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {
       dispatch({type: 'POPULATE_STORIES', hits})
@@ -46,7 +46,6 @@ const BulletinFeed = props => {
   const loadPreviousPage = () => {
     setPage(page - 1)
   }
-
   return (
     <StoriesContext.Provider value={{stories, dispatch}}>
       {stories.map(story => {

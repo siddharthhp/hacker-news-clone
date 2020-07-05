@@ -3,11 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/register": "^7.10.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "axios-hooks": "^2.1.0",
+    "babel-plugin-transform-assets": "^1.0.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0",
     "chart.js": "^2.9.3",
+    "http-server": "^0.12.3",
+    "ignore-styles": "^5.0.1",
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-chartkick": "^0.4.0",
@@ -20,9 +31,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "serve": "http-server ./build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-server": "npm run build && node server/bootstrap.js"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

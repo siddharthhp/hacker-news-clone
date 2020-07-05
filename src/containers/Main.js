@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import BulletinHeader from '../components/BulletinHeader/index'
 import BulletinFeed from './BulletinFeed'
@@ -6,7 +7,7 @@ import {List} from '../styles/List'
 import GlobalFonts from '../styles/Fonts'
 import Reset from '../styles/Reset'
 
-const Main = () => {
+const Main = ({store}) => {
   return (
     <Container>
       <h2>Hacker News Feed</h2>
@@ -14,7 +15,7 @@ const Main = () => {
       <GlobalFonts />
       <List>
         <BulletinHeader />
-        <BulletinFeed />
+        <BulletinFeed store={store} />
       </List>
     </Container>
   )

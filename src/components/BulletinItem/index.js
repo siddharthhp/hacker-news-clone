@@ -15,21 +15,21 @@ import {
 const BulletinItem = ({story}) => {
   const {num_comments, points, title, objectID, created_at, author, url} = story
   const {dispatch} = useContext(StoriesContext)
-  const hiddenElements =
-    JSON.parse(localStorage.getItem('hiddenElements')) || []
-  const upvotedElements =
-    JSON.parse(localStorage.getItem('upvoteElements')) || []
+  // //const hiddenElements =
+  //   JSON.parse(localStorage.getItem('hiddenElements')) || []
+  // const upvotedElements =
+  //   JSON.parse(localStorage.getItem('upvoteElements')) || []
   const upvote = () => {
     dispatch({type: 'INCREASE_UPVOTE', objectID})
-    upvotedElements.push({
-      objectID: points + 1,
-    })
-    localStorage.setItem('upvoteElements', JSON.stringify(upvotedElements))
+    // upvotedElements.push({
+    //   [upvotedElements[objectID]]: points + 1,
+    // })
+    // localStorage.setItem('upvoteElements', JSON.stringify(upvotedElements))
   }
   const hideElement = () => {
     dispatch({type: 'HIDE_ELEMENT', objectID})
-    hiddenElements.push(objectID)
-    localStorage.setItem('hiddenElements', JSON.stringify(hiddenElements))
+    // hiddenElements.push(objectID)
+    // localStorage.setItem('hiddenElements', JSON.stringify(hiddenElements))
   }
   return (
     <NewsItem className="table-row">
