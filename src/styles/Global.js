@@ -1,7 +1,7 @@
 import {createGlobalStyle} from 'styled-components'
 
 export default createGlobalStyle`
-    ul,
+  ul,
   li {
     margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ export default createGlobalStyle`
   }
   body {
     line-height: 1;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
   }
   ol,
   ul {

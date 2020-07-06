@@ -5,6 +5,6 @@ steps:
       args: ["install"]
     - name: node:12.18.2
       entrypoint: npm
-      args: ["run", "build"]
+      args: ["run", "start-server"]
     - name: "gcr.io/cloud-builders/gcloud"
       args: ["app", "deploy"]

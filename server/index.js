@@ -5,7 +5,6 @@ import express from 'express'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet} from 'styled-components'
-import {StaticRouter} from 'react-router-dom'
 import getNewsItems from '../src/services/hnApi'
 
 import App from '../src/App'
@@ -16,7 +15,7 @@ const sheet = new ServerStyleSheet()
 
 const router = express.Router()
 
-const serverRenderer = (req, res, next) => {
+const serverRenderer = (req, res) => {
   fs.readFile(path.resolve('./build/index.html'), 'utf8', async (err, data) => {
     const page = req.query.page || 1
     const newsItems = await getNewsItems(page)
@@ -28,19 +27,15 @@ const serverRenderer = (req, res, next) => {
       sheet.collectStyles(<App store={newsItems} location={req.url} />),
     )
     const styleTags = sheet.getStyleTags()
-    console.log('from server', reactDom)
     return res.send(
       data
         .replace('<div id="root"></div>', `<div id="root">${reactDom}</div>`)
         .replace('__STATE__', JSON.stringify(newsItems))
-        .replace('__STYLE_TAGS__', styleTags),
+        .replace('<style></style>', styleTags),
     )
   })
 }
 router.use('^/$', serverRenderer)
-// router.use('^/$', (req, res, next) => {
-//   res.send('Hello')
-// })
 
 router.use(
   express.static(path.resolve(__dirname, '..', 'build'), {maxAge: '30d'}),

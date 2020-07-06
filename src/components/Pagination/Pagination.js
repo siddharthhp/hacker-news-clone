@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Colors from '../../styles/Colors'
 
 export const PaginationRow = styled.div`
   margin: 20px 0;
@@ -6,21 +7,25 @@ export const PaginationRow = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   a {
-    display: flex;
-    flex-direction: row;
     font-size: 16px;
-    color: #ff6600;
+    color: ${Colors.orange};
     font-weight: bold;
   }
   .prev {
     padding-right: 5px;
-    border-right: 2px solid #ff6600;
+    border-right: 2px solid ${Colors.orange};
     margin-right: 5px;
   }
   .active {
-    color: #ff6600;
+    color: ${Colors.orange};
   }
   a[disabled] {
-    color: #a9a9a9;
+    color: ${Colors.darkGrey};
+  }
+  @media all and (max-width: 767px) {
+    justify-content: space-between;
+    .prev {
+      border-right: none;
+    }
   }
 `

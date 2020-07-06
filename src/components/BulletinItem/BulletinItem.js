@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import Colors from '../../styles/Colors'
 
 export const NewsItem = styled.li`
-  background-color: #ededda;
+  background-color: ${Colors.offWhite};
   &:nth-child(odd) {
-    background: #d6d6c7;
+    background: ${Colors.lightGrey};
   }
 
   @media all and (max-width: 767px) {
@@ -23,6 +24,11 @@ export const Upvote = styled.button`
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-bottom: 14px solid #919191;
+  }
+  @media all and (max-width: 767px) {
+    .arrow-up {
+      top: -8px;
+    }
   }
 `
 export const MobileRow = styled.div`
