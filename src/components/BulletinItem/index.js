@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-import React, {useContext} from 'react'
+import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
-import StoriesContext from '../../context/stories'
 import {
   NewsItem,
   Link,
@@ -11,31 +9,16 @@ import {
   MobileRow,
   Upvote,
 } from './BulletinItem'
-import {pushItemInStorage} from '../../utils/storageSync'
 
-const BulletinItem = ({story}) => {
+const BulletinItem = ({story, onHide, onUpvote}) => {
   const {num_comments, points, title, objectID, created_at, author, url} = story
-  const {dispatch} = useContext(StoriesContext)
-  const upvotedElements =
-    typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem('upvoteElements')) || []
-      : []
-  const upvote = () => {
-    dispatch({type: 'INCREASE_UPVOTE', objectID})
-    upvotedElements.push({
-      objectID,
-      points: points + 1,
-    })
-    localStorage.setItem('upvoteElements', JSON.stringify(upvotedElements))
-  }
-  const hideElement = () => {
-    dispatch({type: 'HIDE_ELEMENT', objectID})
-    pushItemInStorage('hiddenElements', objectID)
+  const handleHide = () => {
+    onHide(objectID)
   }
   return (
     <NewsItem className="table-row">
       <MobileRow>
-        <Upvote onClick={upvote}>
+        <Upvote onClick={onUpvote.bind(null, objectID, points)}>
           <span className="arrow-up"></span>Upvote
         </Upvote>
         <Link href={url} target="_new">
@@ -46,12 +29,12 @@ const BulletinItem = ({story}) => {
         <Text>
           {points} points by {author} <ReactTimeAgo date={created_at} />
         </Text>
-        <HideButton onClick={hideElement}>[ Hide ]</HideButton>
+        <HideButton onClick={handleHide}>[ Hide ]</HideButton>
       </MobileRow>
       <div className="col col-1">{num_comments}</div>
       <div className="col col-2">{points}</div>
       <div className="col col-3">
-        <Upvote onClick={upvote}>
+        <Upvote onClick={onUpvote.bind(null, objectID, points)}>
           <span className="arrow-up"></span>Upvote
         </Upvote>
       </div>
@@ -63,7 +46,7 @@ const BulletinItem = ({story}) => {
         <Text>
           <ReactTimeAgo date={created_at} />
         </Text>
-        <HideButton onClick={hideElement}>[ Hide ]</HideButton>
+        <HideButton onClick={handleHide}>[ Hide ]</HideButton>
       </div>
     </NewsItem>
   )

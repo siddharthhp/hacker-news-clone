@@ -1,18 +1,10 @@
-export const filterNews = (array1, key) => {
-  const array2 =
-    typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem(key)) || []
-      : []
-  return array1.filter(item => {
-    return !array2.includes(item.objectID)
-  })
+export const getItem = key => {
+  return typeof localStorage !== 'undefined'
+    ? JSON.parse(localStorage.getItem(key) || '{}')
+    : {}
 }
 
-export const pushItemInStorage = (key, value) => {
-  const storage =
-    typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem(key)) || []
-      : []
-  storage.push(value)
-  localStorage.setItem(key, JSON.stringify(storage))
+export const setItem = (key, value) => {
+  if (typeof localStorage !== 'undefined')
+    localStorage.setItem(key, JSON.stringify(value))
 }

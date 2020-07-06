@@ -1,21 +1,46 @@
-/* eslint-disable react/prop-types */
-import React, {useState, useReducer, useEffect, useContext} from 'react'
-import storiesReducer from '../reducers/stories'
+import React, {useState, useMemo, useEffect, useContext} from 'react'
 import {BulletinChart} from '../components/BulletinChart/index'
-import BulletinItem from '../components/BulletinItem/index'
-import StoriesContext from '../context/stories'
+import BulletinItems from '../components/BulletinItems/index'
 import getStories from '../services/newsFeed'
 import Pagination from '../components/Pagination'
 import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
-import {filterNews} from '../utils/storageSync'
 import {BorderContainer} from '../styles/Container'
 import AppContext from '../context/appState'
+import {LoaderContainer, Loader} from '../styles/Container'
+import {getItem, setItem} from '../utils/storageSync'
 
 const BulletinFeed = props => {
   const {store} = useContext(AppContext)
-  const [stories, dispatch] = useReducer(storiesReducer, store.hits || [])
+
+  const [stories, setStories] = useState(store.hits || [])
+  const [isLoading, setLoading] = useState(false)
+
+  const formattedStories = useMemo(() => {
+    const cachedUpdates = getItem('cachedUpdates')
+    return stories.map(story => {
+      if (cachedUpdates[story.objectID]) {
+        return {
+          ...story,
+          ...cachedUpdates[story.objectID],
+        }
+      }
+      return story
+    })
+  }, [stories])
+
+  const chartData = useMemo(() => {
+    return formattedStories.reduce((obj, item) => {
+      if (!item.isHidden) {
+        obj[item.objectID] = item.points
+      }
+      return obj
+    }, {})
+  }, [formattedStories])
+
   const [totalPages, setTotalPages] = useState(store.nbPages || 0)
+
   const {page: pageParam} = getQueryParams(props.location.search)
+
   const page = parseInt(pageParam) || 1
 
   const addParamToUrl = pageNumber => {
@@ -26,12 +51,59 @@ const BulletinFeed = props => {
     props.history.push(url)
   }
 
+  const hideStory = id => {
+    const cachedUpdates = getItem('cachedUpdates')
+    const cachedItemValues = cachedUpdates[id] || {}
+    cachedUpdates[id] = {
+      ...cachedItemValues,
+      isHidden: true,
+    }
+    setItem('cachedUpdates', cachedUpdates)
+    setStories(
+      stories.map(story => {
+        if (story.objectID === id) {
+          return {
+            ...story,
+            isHidden: true,
+          }
+        }
+        return story
+      }),
+    )
+  }
+
+  const upvote = (id, points) => {
+    const cachedUpdates = getItem('cachedUpdates')
+    const cachedItemValues = cachedUpdates[id] || {}
+    cachedUpdates[id] = {
+      ...cachedItemValues,
+      points: points + 1,
+    }
+    setItem('cachedUpdates', cachedUpdates)
+    setStories(
+      stories.map(story => {
+        if (story.objectID === id) {
+          return {
+            ...story,
+            points: points + 1,
+          }
+        }
+        return story
+      }),
+    )
+  }
+
   useEffect(() => {
-    getStories(page).then(({hits, nbPages}) => {
-      hits = filterNews(hits, 'hiddenElements')
-      dispatch({type: 'POPULATE_STORIES', hits})
-      !totalPages && setTotalPages(nbPages)
-    })
+    setLoading(true)
+    getStories(page)
+      .then(({hits, nbPages}) => {
+        setStories(hits)
+        if (!totalPages) setTotalPages(nbPages)
+        setLoading(false)
+      })
+      .catch(() => {
+        setLoading(false)
+      })
   }, [page])
 
   if (!pageParam || !parseInt(pageParam)) {
@@ -48,12 +120,17 @@ const BulletinFeed = props => {
   }
 
   return (
-    <StoriesContext.Provider value={{stories, dispatch}}>
-      {stories.map(story => {
-        return (
-          story.title && <BulletinItem key={story.objectID} story={story} />
-        )
-      })}
+    <>
+      {isLoading && (
+        <LoaderContainer>
+          <Loader></Loader>
+        </LoaderContainer>
+      )}
+      <BulletinItems
+        onUpvote={upvote}
+        onHide={hideStory}
+        stories={formattedStories}
+      />
       <Pagination
         currentPage={page}
         totalPages={totalPages}
@@ -61,9 +138,9 @@ const BulletinFeed = props => {
         loadNextPage={loadNextPage}
       />
       <BorderContainer>
-        <BulletinChart />
+        <BulletinChart data={chartData} />
       </BorderContainer>
-    </StoriesContext.Provider>
+    </>
   )
 }
 
