@@ -3,18 +3,16 @@ import BulletinHeader from '../components/BulletinHeader/index'
 import BulletinFeed from './BulletinFeed'
 import {Container} from '../styles/Container'
 import {List} from '../styles/List'
-import GlobalFonts from '../styles/Fonts'
-import Reset from '../styles/Reset'
+import Global from '../styles/Global'
 
-const Main = () => {
+const Main = ({...props}) => {
   return (
     <Container>
       <h2>Hacker News Feed</h2>
-      <Reset />
-      <GlobalFonts />
+      <Global />
       <List>
         <BulletinHeader />
-        <BulletinFeed />
+        <BulletinFeed {...props} />
       </List>
     </Container>
   )

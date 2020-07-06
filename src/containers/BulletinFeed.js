@@ -6,45 +6,41 @@ import BulletinItem from '../components/BulletinItem/index'
 import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
 import Pagination from '../components/Pagination'
-import {withRouter} from 'react-router-dom'
-import {
-  prepareQueryParams,
-  getQueryParams,
-  isValidValue,
-} from '../utils/urlModifier'
+import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
+import {BorderContainer} from '../styles/Container'
 
 const BulletinFeed = props => {
-  const [stories, dispatch] = useReducer(storiesReducer, [])
-  const [totalPages, setTotalPages] = useState(0)
-  const params = getQueryParams()
-  const pageParam =
-    isValidValue(params) && isValidValue(params.page)
-      ? parseInt(params.page)
-      : 1
+  const [stories, dispatch] = useReducer(storiesReducer, props.store.hits || [])
+  const [totalPages, setTotalPages] = useState(props.store.nbPages || 0)
+  const {page: pageParam} = getQueryParams(props.location.search)
+  const page = parseInt(pageParam) || 1
 
-  const addParamToUrl = () => {
+  const addParamToUrl = pageNumber => {
     const payload = {
-      page: page,
+      page: pageNumber,
     }
     let url = prepareQueryParams(payload)
     props.history.push(url)
   }
-  const [page, setPage] = useState(pageParam)
 
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {
       dispatch({type: 'POPULATE_STORIES', hits})
       !totalPages && setTotalPages(nbPages)
     })
-    addParamToUrl()
   }, [page])
 
+  if (!pageParam || !parseInt(pageParam)) {
+    addParamToUrl(1)
+    return null
+  }
+
   const loadNextPage = () => {
-    setPage(page + 1)
+    addParamToUrl(page + 1)
   }
 
   const loadPreviousPage = () => {
-    setPage(page - 1)
+    return page <= 1 ? '' : addParamToUrl(page - 1)
   }
 
   return (
@@ -60,9 +56,11 @@ const BulletinFeed = props => {
         loadPreviousPage={loadPreviousPage}
         loadNextPage={loadNextPage}
       />
-      <BulletinChart />
+      <BorderContainer>
+        <BulletinChart />
+      </BorderContainer>
     </StoriesContext.Provider>
   )
 }
 
-export default withRouter(BulletinFeed)
+export default BulletinFeed
