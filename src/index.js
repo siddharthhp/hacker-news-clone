@@ -10,4 +10,4 @@ if (window && window.__INITIAL_STATE__) {
 
 hydrate(<App store={value} />, document.getElementById('root'))
 
-serviceWorker.unregister()
+serviceWorker.register()
