@@ -1,5 +1,7 @@
 import path from 'path'
 import fs from 'fs'
+import compression from 'compression'
+import helmet from 'helmet'
 
 import express from 'express'
 import React from 'react'
@@ -11,6 +13,8 @@ import App from '../src/App'
 
 const PORT = process.env.PORT || 8080
 const app = express()
+app.use(helmet())
+app.use(compression())
 const sheet = new ServerStyleSheet()
 
 const router = express.Router()
