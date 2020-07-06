@@ -9,7 +9,7 @@ import getNewsItems from '../src/services/hnApi'
 
 import App from '../src/App'
 
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 const app = express()
 const sheet = new ServerStyleSheet()
 
