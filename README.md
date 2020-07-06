@@ -1,28 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hacker News CLone
 
-## Available Scripts
+This is a replication of the hacker news feed with the help of React, React-Router, React Hooks and Express JS for,
+supporting server side rendering.
 
-In the project directory, you can run:
+This is application uses Husky for pre-commit checks with an eslint and prettier configuration in place.
 
-### `npm start`
+The upvote and hide item functionality is currently implemented with local storage as our medium as the API's
+supporting this feature are not available currently.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+There is a git pre-merge hook also in place to check whether the pull request introduces any breaking changes
+into the ecosystem or not, defined inside the git workflows folder.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Deployment
 
-### `npm test`
+This app is currently deployed at:
+```bash
+https://hacker-news-clone-aivkvny6kq-uc.a.run.app/?page=1
+```
+There is a github workflow in place which automatically triggers the build once we have merged our feature
+branch into the master branch.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We have a dockerfile in place which lists all the configuration for container creation and commands to be run post
+container creation.
 
-### `npm build`
+### Installation
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For setting up this application locally, please start by cloning this repository in the folder of your choice.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Next you will have to install all the dependencies using:
+```bash
+npm install
+```
+Post installation of dependencies we have multiple scripts at our disposal for various tasks:
+- For starting the dev mode of our application in browser at localhost:3000
+```bash
+npm start
+```
+- For starting the express server for server side rendering
+```bash
+npm run build && node server/bootstrap.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
