@@ -30,8 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-server": "node server/bootstrap.js",
-    "gcp-build": "npm run build && node server/bootstrap.js"
+    "start-server": "npm run build && node server/bootstrap.js"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
