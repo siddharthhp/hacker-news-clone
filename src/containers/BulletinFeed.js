@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {useState, useReducer, useEffect} from 'react'
+import React, {useState, useReducer, useEffect, useContext} from 'react'
 import storiesReducer from '../reducers/stories'
 import {BulletinChart} from '../components/BulletinChart/index'
 import BulletinItem from '../components/BulletinItem/index'
@@ -8,10 +8,12 @@ import getStories from '../services/hnApi'
 import Pagination from '../components/Pagination'
 import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
 import {BorderContainer} from '../styles/Container'
+import AppContext from '../context/appState'
 
 const BulletinFeed = props => {
-  const [stories, dispatch] = useReducer(storiesReducer, props.store.hits || [])
-  const [totalPages, setTotalPages] = useState(props.store.nbPages || 0)
+  const {store} = useContext(AppContext)
+  const [stories, dispatch] = useReducer(storiesReducer, store.hits || [])
+  const [totalPages, setTotalPages] = useState(store.nbPages || 0)
   const {page: pageParam} = getQueryParams(props.location.search)
   const page = parseInt(pageParam) || 1
 
