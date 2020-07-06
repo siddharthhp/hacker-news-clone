@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
-const StoriesContext = React.createContext();
+const StoriesContext = React.createContext()
 
-export { StoriesContext as default }
+export default StoriesContext

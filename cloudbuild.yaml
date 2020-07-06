@@ -8,6 +8,3 @@ steps:
       args: ["run", "build"]
     - name: "gcr.io/cloud-builders/gcloud"
       args: ["app", "deploy"]
-    - name: "gcr.io/cloud-builders/npm"
-      entrypoint: npm
-      args: ["run", "start-server"]
