@@ -7,7 +7,7 @@ import express from 'express'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
 import {ServerStyleSheet} from 'styled-components'
-import getNewsItems from '../src/services/hnApi'
+import getNewsItems from '../src/services/newsFeed'
 
 import App from '../src/App'
 
