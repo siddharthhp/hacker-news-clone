@@ -23,7 +23,8 @@ const BulletinItem = ({story}) => {
   const upvote = () => {
     dispatch({type: 'INCREASE_UPVOTE', objectID})
     upvotedElements.push({
-      objectID: points + 1,
+      objectID,
+      points: points + 1,
     })
     localStorage.setItem('upvoteElements', JSON.stringify(upvotedElements))
   }

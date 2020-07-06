@@ -1,8 +1,8 @@
 const Colors = {
   white: '#fff',
   orange: '#ff6600',
-  offWhite: '#ededda',
-  lightGrey: '#d6d6c7',
+  offWhite: '#f5f5e9',
+  lightGrey: '#e6e6dc',
   darkGrey: '#a9a9a9',
 }
 
