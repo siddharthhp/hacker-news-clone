@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import {LineChart} from 'react-chartkick'
 import 'chart.js'
-import StoriesContext from '../context/stories'
+import StoriesContext from '../../context/stories'
 
 export const BulletinChart = () => {
   const {stories} = useContext(StoriesContext)
