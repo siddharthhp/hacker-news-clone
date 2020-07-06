@@ -11,14 +11,11 @@ import {
   MobileRow,
   Upvote,
 } from './BulletinItem'
+import {pushItemInStorage} from '../../utils/storageSync'
 
 const BulletinItem = ({story}) => {
   const {num_comments, points, title, objectID, created_at, author, url} = story
   const {dispatch} = useContext(StoriesContext)
-  const hiddenElements =
-    typeof localStorage !== 'undefined'
-      ? JSON.parse(localStorage.getItem('hiddenElements')) || []
-      : []
   const upvotedElements =
     typeof localStorage !== 'undefined'
       ? JSON.parse(localStorage.getItem('upvoteElements')) || []
@@ -32,8 +29,7 @@ const BulletinItem = ({story}) => {
   }
   const hideElement = () => {
     dispatch({type: 'HIDE_ELEMENT', objectID})
-    hiddenElements.push(objectID)
-    localStorage.setItem('hiddenElements', JSON.stringify(hiddenElements))
+    pushItemInStorage('hiddenElements', objectID)
   }
   return (
     <NewsItem className="table-row">

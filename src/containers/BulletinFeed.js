@@ -7,6 +7,7 @@ import StoriesContext from '../context/stories'
 import getStories from '../services/hnApi'
 import Pagination from '../components/Pagination'
 import {getQueryParams, prepareQueryParams} from '../utils/urlModifier'
+import {filterNews} from '../utils/storageSync'
 import {BorderContainer} from '../styles/Container'
 import AppContext from '../context/appState'
 
@@ -27,6 +28,7 @@ const BulletinFeed = props => {
 
   useEffect(() => {
     getStories(page).then(({hits, nbPages}) => {
+      hits = filterNews(hits, 'hiddenElements')
       dispatch({type: 'POPULATE_STORIES', hits})
       !totalPages && setTotalPages(nbPages)
     })

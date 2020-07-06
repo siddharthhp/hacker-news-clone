@@ -15,6 +15,7 @@
     "chart.js": "^2.9.3",
     "ignore-styles": "^5.0.1",
     "moment": "^2.27.0",
+    "node-fetch": "^2.6.0",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-chartkick": "^0.4.0",
@@ -30,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-server": "npm run build && node server/bootstrap.js"
+    "start-server": "node server/bootstrap.js"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
