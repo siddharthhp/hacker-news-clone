@@ -1,8 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {act} from 'react-dom/test-utils'
+import {createMemoryHistory} from 'history'
 import {render, fireEvent} from '@testing-library/react'
-import nock from 'nock'
 import BulletinFeed from '../BulletinFeed'
 import AppContext from '../../context/appState'
 
@@ -103,7 +101,7 @@ const location = {
   },
 }
 
-const history = []
+const history = createMemoryHistory()
 
 it('render the component with initial state passed from server', () => {
   const {findByText, getByText} = render(

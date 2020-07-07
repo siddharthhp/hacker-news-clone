@@ -1,6 +1,5 @@
 import React from 'react'
 import {render, fireEvent} from '@testing-library/react'
-import nock from 'nock'
 import BulletinItems from '../index'
 import JavascriptTimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
@@ -90,7 +89,7 @@ const baseProps = {
 }
 
 it('check if the parent hide function is being called on click of hide button', async () => {
-  const {findByText, getAllByRole} = render(<BulletinItems {...baseProps} />)
+  const {getAllByRole} = render(<BulletinItems {...baseProps} />)
   const button = getAllByRole('button', {name: /hide/i})
   fireEvent.click(button[1])
   expect(baseProps.onHide).toHaveBeenCalledTimes(1)
