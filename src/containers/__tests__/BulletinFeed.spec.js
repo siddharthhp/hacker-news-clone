@@ -1,8 +1,11 @@
 import React from 'react'
+import {Router, Route} from 'react-router-dom'
 import {createMemoryHistory} from 'history'
 import {render, fireEvent} from '@testing-library/react'
 import BulletinFeed from '../BulletinFeed'
 import AppContext from '../../context/appState'
+import JavascriptTimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 
 const store = {
   store: {
@@ -81,8 +84,11 @@ const store = {
         },
       },
     ],
+    nbPages: 2,
   },
 }
+
+JavascriptTimeAgo.addLocale(en)
 
 let container
 beforeEach(() => {
@@ -95,19 +101,27 @@ afterEach(() => {
   container = null
 })
 
-const location = {
-  page: {
-    pageParam: '?page=1',
-  },
-}
-
-const history = createMemoryHistory()
+const history = createMemoryHistory(['/'])
+const route = '/'
 
 it('render the component with initial state passed from server', () => {
-  const {findByText, getByText} = render(
-    <AppContext.Provider value={store}>
-      <BulletinFeed location={location} history={history} />
-    </AppContext.Provider>,
+  const {getAllByText, getAllByTestId} = render(
+    <Router history={history}>
+      <Route
+        path={route}
+        render={props => {
+          return (
+            <AppContext.Provider value={store}>
+              <BulletinFeed {...props} />
+            </AppContext.Provider>
+          )
+        }}
+      ></Route>
+    </Router>,
     container,
   )
+  const button = getAllByText('Upvote')[0]
+  const points = getAllByTestId('points-13713480')[0]
+  fireEvent.click(button)
+  expect(points.innerHTML).toBe('3031')
 })

@@ -32,7 +32,9 @@ const BulletinItem = ({story, onHide, onUpvote}) => {
         <HideButton onClick={handleHide}>[ Hide ]</HideButton>
       </MobileRow>
       <div className="col col-1">{num_comments}</div>
-      <div className="col col-2">{points}</div>
+      <div className="col col-2" data-testid={`points-${objectID}`}>
+        {points}
+      </div>
       <div className="col col-3">
         <Upvote onClick={onUpvote.bind(null, objectID, points)}>
           <span className="arrow-up"></span>Upvote

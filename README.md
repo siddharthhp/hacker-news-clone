@@ -1,14 +1,14 @@
 # Hacker News CLone
 
-This is a replication of the hacker news feed with the help of React, React-Router, React Hooks and Express JS for,
-supporting server side rendering.
+This is a replication of the hacker news feed using React, React-Router, React Hooks and Express JS for,
+supporting server side rendering, following the atomic design pattern.
 
 This is application uses Husky for pre-commit checks with an eslint and prettier configuration in place.
 
-The upvote and hide item functionality is currently implemented with local storage as our medium as the API's
+The upvote and hide item functionality is currently implemented with local storage as our updation medium since the API's
 supporting this feature are not available currently.
 
-There is a git pre-merge hook also in place to check whether the pull request introduces any breaking changes
+There is a git pre-merge workflow in place to check whether the pull request introduces any breaking changes
 into the ecosystem or not, defined inside the git workflows folder.
 
 ## Deployment
@@ -40,11 +40,5 @@ npm start
 ```bash
 npm run build && node server/bootstrap.js
 ```
-- Due to limited time availability I have only covered two test scenarios in this application
-    - Testing DOM interaction
-    - Mocking an API call from the component
-To execute test cases please use:
-```bash
-npm run test
-```
+
 
