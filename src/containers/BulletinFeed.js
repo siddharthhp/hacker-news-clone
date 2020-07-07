@@ -11,7 +11,6 @@ import {getItem, setItem} from '../utils/storageSync'
 
 const BulletinFeed = props => {
   const {store} = useContext(AppContext)
-
   const [stories, setStories] = useState(store.hits || [])
   const [isLoading, setLoading] = useState(false)
 
@@ -120,7 +119,6 @@ const BulletinFeed = props => {
   const loadPreviousPage = () => {
     return page <= 1 ? '' : addParamToUrl(page - 1)
   }
-
   return (
     <>
       {isLoading && (
