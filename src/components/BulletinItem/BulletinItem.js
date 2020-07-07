@@ -15,6 +15,10 @@ export const NewsItem = styled.li`
 `
 export const Upvote = styled.button`
   font-size: 0;
+  padding: 0px;
+  &:focus {
+    outline-color: cornflowerblue;
+  }
   .arrow-up {
     width: 0;
     height: 0;
@@ -26,6 +30,7 @@ export const Upvote = styled.button`
     border-bottom: 14px solid #919191;
   }
   @media all and (max-width: 767px) {
+    padding-right: 8px;
     .arrow-up {
       top: -8px;
     }
@@ -33,6 +38,7 @@ export const Upvote = styled.button`
 `
 export const MobileRow = styled.div`
   display: none;
+  align-items: center;
   @media all and (max-width: 767px) {
     display: flex;
     padding: 8px;

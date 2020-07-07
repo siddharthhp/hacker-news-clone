@@ -41,9 +41,7 @@ const serverRenderer = (req, res) => {
 }
 router.use('^/$', serverRenderer)
 
-router.use(
-  express.static(path.resolve(__dirname, '..', 'build'), {maxAge: '30d'}),
-)
+router.use(express.static(path.resolve(__dirname, '..', 'build')))
 app.use(router)
 app.listen(PORT, () => {
   console.log(`SSR running on port ${PORT}`)

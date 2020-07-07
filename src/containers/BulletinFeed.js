@@ -98,7 +98,9 @@ const BulletinFeed = props => {
     getStories(page)
       .then(({hits, nbPages}) => {
         setStories(hits)
-        if (!totalPages) setTotalPages(nbPages)
+        if (!totalPages) {
+          setTotalPages(nbPages)
+        }
         setLoading(false)
       })
       .catch(() => {
