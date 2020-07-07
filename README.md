@@ -11,6 +11,11 @@ supporting this feature are not available currently.
 There is a git pre-merge workflow in place to check whether the pull request introduces any breaking changes
 into the ecosystem or not, defined inside the git workflows folder.
 
+Attaching lighthouse report for reference
+
+![light_house](https://user-images.githubusercontent.com/14306816/86757436-c3a53900-c060-11ea-85ff-a7dd25d978b6.PNG)
+
+
 ## Deployment
 
 This app is currently deployed at:
