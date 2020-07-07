@@ -1,6 +1,8 @@
 import styled from 'styled-components'
+import Colors from './Colors'
 
 export const List = styled.ul`
+  position: relative;
   li {
     padding: 8px 8px;
     display: flex;
@@ -25,6 +27,7 @@ export const List = styled.ul`
   }
 
   @media all and (max-width: 767px) {
+    border-top: 30px solid ${Colors.orange};
     li {
       display: block;
     }

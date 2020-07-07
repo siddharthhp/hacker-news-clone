@@ -40,4 +40,11 @@ npm start
 ```bash
 npm run build && node server/bootstrap.js
 ```
+- Due to limited time availability I have only covered two test scenarios in this application
+    - Testing DOM interaction
+    - Mocking an API call from the component
+To execute test cases please use:
+```bash
+npm run test
+```
 

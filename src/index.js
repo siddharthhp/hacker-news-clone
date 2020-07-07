@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker'
 let value = {}
 if (window && window.__INITIAL_STATE__) {
   value = window.__INITIAL_STATE__
-  delete window.__STATE__
+  delete window.__INITIAL_STATE__
 }
 
 hydrate(<App store={value} />, document.getElementById('root'))

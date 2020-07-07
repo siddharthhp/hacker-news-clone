@@ -24,9 +24,11 @@ export const LoaderContainer = styled.div`
   height: 100%;
   width: 100%;
   position: absolute;
-  left: 0;
-  right: 0;
   z-index: 10;
+  @media all and (max-width: 767px) {
+    align-items: flex-start;
+    padding-top: 100px;
+  }
 `
 const rotate = keyframes`
   to {

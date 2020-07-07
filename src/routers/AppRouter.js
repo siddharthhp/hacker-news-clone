@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Switch, Link} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import Main from '../containers/Main'
 import AppContext from '../context/appState'
 
